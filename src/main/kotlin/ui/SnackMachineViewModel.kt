@@ -38,7 +38,7 @@ class SnackMachineViewModel(private val snackMachine: SnackMachine) {
     }
 
     private fun buySnack() {
-        snackMachine.buySnack()
+        snackMachine.buySnack(1)
         message = "You bought a snack"
     }
 
