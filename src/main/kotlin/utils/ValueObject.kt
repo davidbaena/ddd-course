@@ -1,4 +1,4 @@
-package ddd
+package utils
 
 abstract class ValueObject<T> {
 

@@ -1,6 +1,6 @@
 package ui
 
-import logic.SnackMachine
+import domain.SnackMachine
 
 fun main() {
     val snackMachineViewModel = SnackMachineViewModel(SnackMachine())

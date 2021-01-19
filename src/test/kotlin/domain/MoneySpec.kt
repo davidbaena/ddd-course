@@ -1,4 +1,4 @@
-package logic
+package domain
 
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.core.Is.`is`

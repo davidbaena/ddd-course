@@ -1,5 +1,6 @@
-package logic
+package domain
 
+import db.SessionFactory
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID

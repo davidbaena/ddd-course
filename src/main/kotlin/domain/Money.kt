@@ -1,6 +1,6 @@
-package logic
+package domain
 
-import ddd.ValueObject
+import utils.ValueObject
 
 data class Money(
     val oneCentCount: Int = 0,

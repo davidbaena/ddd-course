@@ -1,7 +1,7 @@
 package ui
 
-import logic.Money
-import logic.SnackMachine
+import domain.Money
+import domain.SnackMachine
 import kotlin.system.exitProcess
 
 class SnackMachineViewModel(private val snackMachine: SnackMachine) {

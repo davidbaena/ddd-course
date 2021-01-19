@@ -1,4 +1,4 @@
-package logic
+package db
 
 import org.jetbrains.exposed.sql.Database
 

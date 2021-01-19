@@ -1,4 +1,4 @@
-package logic
+package domain
 
 import org.hamcrest.core.Is
 import org.junit.Assert

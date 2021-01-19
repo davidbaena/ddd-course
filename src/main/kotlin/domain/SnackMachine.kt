@@ -1,6 +1,6 @@
-package logic
+package domain
 
-import ddd.Entity
+import utils.Entity
 
 class SnackMachine(
     var moneyInside: Money = Money.ZERO,
