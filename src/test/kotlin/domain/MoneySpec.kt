@@ -72,7 +72,7 @@ class MoneySpec {
     }
 
     @Test
-    fun cannot_substract_more_than_exists() {
+    fun cannot_subtract_more_than_exists() {
         val money1 = Money(1, 0, 0, 0, 0, 0)
         val money2 = Money(0, 1, 0, 0, 0, 0)
         try {

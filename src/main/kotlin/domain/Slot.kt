@@ -5,8 +5,7 @@ import utils.Entity
 class Slot(
     var snackMachine: SnackMachine,
     var position: Int,
-    var snack: Snack?,
-    var quantity: Int,
-    var price: Double
+    var snackPile: SnackPile = SnackPile(null, 0, 0.0)
 ) : Entity() {
+
 }

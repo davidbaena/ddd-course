@@ -1,6 +1,6 @@
 package domain
 
-import utils.Entity
+import utils.AggregateRoot
 
-class Snack(var name: String) : Entity() {
+class Snack(var name: String) : AggregateRoot() {
 }

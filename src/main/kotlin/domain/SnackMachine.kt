@@ -1,15 +1,16 @@
 package domain
 
-import utils.Entity
+import utils.AggregateRoot
 
-class SnackMachine : Entity() {
+class SnackMachine : AggregateRoot() {
 
     var moneyInside: Money = Money.ZERO
-    var moneyInTransaction: Money = Money.ZERO
-    val slots: MutableList<Slot> = mutableListOf(
-        Slot(snackMachine = this, 0, null, 0, 0.00),
-        Slot(snackMachine = this, 1, null, 0, 0.00),
-        Slot(snackMachine = this, 2, null, 0, 0.00)
+    var moneyInTransaction: Double = 0.0
+
+    private val slots: MutableList<Slot> = mutableListOf(
+        Slot(snackMachine = this, 0),
+        Slot(snackMachine = this, 1),
+        Slot(snackMachine = this, 2)
     )
 
     fun insertMoney(money: Money) {
@@ -24,28 +25,43 @@ class SnackMachine : Entity() {
         )
         if (!coinsAndNotes.contains(money)) throw IllegalArgumentException()
 
-        moneyInTransaction = money + moneyInTransaction
+        moneyInTransaction += money.amount
+        moneyInside += money
     }
 
     fun returnMoney() {
-        moneyInTransaction = Money.ZERO
+        val moneyReturn = moneyInside.change(moneyInTransaction)
+        moneyInside -= moneyReturn
+
+        moneyInTransaction = 0.0
     }
 
     fun buySnack(position: Int) {
         val slot = slots[position]
-        slot.quantity -= 1
+
+        if (slot.snackPile.price > moneyInTransaction)
+            throw IllegalArgumentException()
+
+
+        slot.snackPile = slot.snackPile.subtractOne()
         slots[position] = slot
 
-        moneyInside += moneyInTransaction
-        moneyInTransaction = Money.ZERO
+        val change = moneyInside.change(moneyInTransaction - slot.snackPile.price)
+
+        if (change.amount < moneyInTransaction - slot.snackPile.price)
+            throw IllegalArgumentException()
+
+        moneyInside -= change
+        moneyInTransaction = 0.0
     }
 
-    fun loadSnacks(position: Int, snack: Snack, quantity: Int, price: Double) {
-        val slot = slots[position]
-        slot.snack = snack
-        slot.quantity = quantity
-        slot.price = price
-        slots[position] = slot
-        print(slots)
+    fun getSnackPile(position: Int): SnackPile = slots[position].snackPile
+
+    fun loadSnacks(position: Int, snackPile: SnackPile) {
+        slots[position] = Slot(this, position, snackPile)
+    }
+
+    fun loadMoney(money: Money) {
+        moneyInside += money
     }
 }

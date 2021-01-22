@@ -1,6 +1,7 @@
 package domain
 
 import utils.ValueObject
+import kotlin.math.min
 
 data class Money(
     val oneCentCount: Int = 0,
@@ -60,6 +61,17 @@ data class Money(
         )
     }
 
+    operator fun times(times: Int): Money {
+        return Money(
+            oneCentCount = oneCentCount * times,
+            tenCentCount = tenCentCount * times,
+            quarterCentCount = quarterCentCount * times,
+            oneDollarCount = oneDollarCount * times,
+            fiveDollarCount = fiveDollarCount * times,
+            twentyDollarCount = twentyDollarCount * times
+        )
+    }
+
     override fun toString(): String {
         return if (amount < 1.0) {
             "cents ${(amount * 100).toInt()}"
@@ -75,6 +87,37 @@ data class Money(
                 other.oneDollarCount == oneDollarCount &&
                 other.fiveDollarCount == fiveDollarCount &&
                 other.twentyDollarCount == twentyDollarCount
+    }
+
+    fun change(rawAmount: Double): Money {
+        var returnAmount = rawAmount
+
+        val twentyDollarCountReturned = min((returnAmount / 20).toInt(), twentyDollarCount)
+        returnAmount -= twentyDollarCountReturned * 20
+
+        val fiveDollarCountReturned = min((returnAmount / 5).toInt(), fiveDollarCount)
+        returnAmount -= fiveDollarCountReturned * 5
+
+        val oneDollarCountReturned = min((returnAmount / 1).toInt(), oneDollarCount)
+        returnAmount -= oneDollarCountReturned
+
+        val quarterCentCountReturned = min((returnAmount / 0.25).toInt(), quarterCentCount)
+        returnAmount -= quarterCentCountReturned * 0.25
+
+        val tenCentCountReturned = min((returnAmount / 0.1).toInt(), tenCentCount)
+        returnAmount -= tenCentCountReturned * 0.1
+
+        val oneCentCountReturned = min((returnAmount / 0.01).toInt(), tenCentCount)
+        returnAmount -= oneCentCountReturned * 0.01
+
+        return Money(
+            oneCentCountReturned,
+            tenCentCountReturned,
+            quarterCentCountReturned,
+            oneDollarCountReturned,
+            fiveDollarCountReturned,
+            twentyDollarCountReturned
+        )
     }
 }
 

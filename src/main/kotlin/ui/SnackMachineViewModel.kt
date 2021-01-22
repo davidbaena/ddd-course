@@ -19,7 +19,7 @@ class SnackMachineViewModel(private val snackMachine: SnackMachine) {
         get() = snackMachine.moneyInTransaction
 
     private val moneyInside
-        get() = snackMachine.moneyInTransaction + snackMachine.moneyInside
+        get() = snackMachine.moneyInside
 
     private var message: String = ""
         set(value) {
