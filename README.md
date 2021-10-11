@@ -1,5 +1,5 @@
 # ddd-course
-
+```mermaid
 DDD course: Design in Practice 
 sequenceDiagram
 Alice->>John: Hello John, how are you?
@@ -9,5 +9,5 @@ end
 Note right of John: Rational thoughts!
 John-->>Alice: Great!
 John->>Bob: How about you?
-Bob-->>John: Jolly good!
-    
+Bob-->>John: Jolly good! 
+```
