@@ -1,8 +1,6 @@
-# ddd-course
-Doc:
+DDD course: Design in Practice 
 
 ```mermaid
-DDD course: Design in Practice 
 sequenceDiagram
 Alice->>John: Hello John, how are you?
 loop Healthcheck
