@@ -1,4 +1,6 @@
 # ddd-course
+Doc:
+
 ```mermaid
 DDD course: Design in Practice 
 sequenceDiagram
